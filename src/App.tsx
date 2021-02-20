@@ -1,4 +1,5 @@
 import { FormEvent, useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import './App.css';
 import seedrandom from 'seedrandom';
 
@@ -14,42 +15,48 @@ function App() {
   const [resultColor, setResultColor] = useState('black');
   const resultRef = useRef<HTMLHeadingElement>(null);
 
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+  };
+
   const sortHouse = (e: FormEvent) => {
     e.preventDefault();
 
     if (name.length <= 1 || name.match(/^[0-9]+$/) !== null) {
-      alert('Digite um nome válido!');
+      alert(t('invalidName'));
       return;
     }
 
     const random = seedrandom(name);
-    const houseNumber = getRandomInt(1, 4, random);
-    const yourHouseIs = 'Sua casa é ';
+    const houseNumber = getRandomInt(1, 5, random);
+    const yourHouseIs = t('yourHouseIs');
 
     setResultColor('black');
-    setResult('O chapéu está pensando.');
+    setResult(t('hatThinking'));
 
     setTimeout(() => {
       switch (houseNumber) {
         case 1:
-          setResult(yourHouseIs + 'Grifinória');
+          setResult(yourHouseIs + t('houses.gryffindor'));
           setResultColor('red');
           break;
         case 2:
-          setResult(yourHouseIs + 'Sonserina');
+          setResult(yourHouseIs + t('houses.slytherin'));
           setResultColor('green');
           break;
         case 3:
-          setResult(yourHouseIs + 'Corvinal');
-          setResultColor('orange');
+          setResult(yourHouseIs + t('houses.ravenclaw'));
+          setResultColor('blue');
           break;
         case 4:
-          setResult(yourHouseIs + 'Lufa Lufa');
-          setResultColor('blue');
+          setResult(yourHouseIs + t('houses.hufflepuff'));
+          setResultColor('orange');
           break;
         default:
-          setResult(yourHouseIs + 'Lufa Lufa');
-          setResultColor('blue');
+          setResult(yourHouseIs + t('houses.hufflepuff'));
+          setResultColor('orange');
       }
       resultRef?.current?.scrollIntoView({ behavior: 'smooth' });
     }, 3000);
@@ -57,8 +64,17 @@ function App() {
 
   return (
     <div className="App">
+      <div className="langSelector">
+        <button type="button" onClick={() => changeLanguage('en')}>
+          EN
+        </button>
+        <button type="button" onClick={() => changeLanguage('pt')}>
+          PT
+        </button>
+      </div>
+
       <img src="images/Hogwarts.webp" alt="hogwarts crest" height="150" />
-      <h1 className="title">Descubra sua casa em Hogwarts</h1>
+      <h1 className="title">{t('title')}</h1>
       <form>
         <input
           id="name"
@@ -68,33 +84,33 @@ function App() {
           min={2}
           className="name"
           onChange={(e) => setName(e.target.value)}
-          placeholder="Digite o seu nome completo"
+          placeholder={t('inputPlaceholder')}
         />
         <button
           type="submit"
           className="copperBtn generalBtn"
           onClick={sortHouse}
         >
-          Ver a sua casa
+          {t('inputText')}
         </button>
       </form>
       <div className={`result ${resultColor}`}>
         {result && (
           <>
-            {result.includes('Lufa Lufa') && (
+            {result.includes(t('houses.hufflepuff')) && (
               <img
                 src="images/Hufflepuff.webp"
                 height="200"
                 alt="house crest"
               />
             )}
-            {result.includes('Corvinal') && (
+            {result.includes(t('houses.ravenclaw')) && (
               <img src="images/Ravenclaw.webp" height="200" alt="house crest" />
             )}
-            {result.includes('Sonserina') && (
+            {result.includes(t('houses.slytherin')) && (
               <img src="images/Slytherin.webp" height="200" alt="house crest" />
             )}
-            {result.includes('Grifinória') && (
+            {result.includes(t('houses.gryffindor')) && (
               <img
                 src="images/Gryffindor.webp"
                 height="200"
@@ -103,7 +119,11 @@ function App() {
             )}
             <h2
               ref={resultRef}
-              className={result.includes('pensando') ? 'appendMovingDots' : ''}
+              className={
+                result.includes(t('hatThinking'))
+                  ? 'loading appendMovingDots'
+                  : 'house'
+              }
             >
               {result}
             </h2>

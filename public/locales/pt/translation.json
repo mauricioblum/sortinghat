@@ -1,0 +1,14 @@
+{
+  "title": "Descubra sua casa em Hogwarts",
+  "invalidName": "Digite um nome válido!",
+  "yourHouseIs": "Sua casa é ",
+  "hatThinking": "O chapéu está pensando ",
+  "houses": {
+    "gryffindor": "Grifinória",
+    "slytherin": "Sonserina",
+    "hufflepuff": "Lufa Lufa",
+    "ravenclaw": "Corvinal"
+  },
+  "inputPlaceholder": "Digite o seu nome completo",
+  "inputText": "Colocar o chapéu"
+}

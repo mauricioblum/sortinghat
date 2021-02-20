@@ -1,6 +1,6 @@
 {
-  "short_name": "Sorting Hat",
-  "name": "Sorting Hat",
+  "short_name": "Chapéu Seletor",
+  "name": "Chapéu Seletor",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#efdab2"
+  "theme_color": "#10141b",
+  "background_color": "#10141b"
 }

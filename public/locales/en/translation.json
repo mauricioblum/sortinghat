@@ -1,0 +1,14 @@
+{
+  "title": "Discover your Hogwarts House",
+  "invalidName": "Enter a valid name!",
+  "yourHouseIs": "Your House is ",
+  "hatThinking": "The hat is thinking ",
+  "houses": {
+    "gryffindor": "Gryffindor",
+    "slytherin": "Slytherin",
+    "hufflepuff": "Hufflepuff",
+    "ravenclaw": "Ravenclaw"
+  },
+  "inputPlaceholder": "Enter your full name",
+  "inputText": "Put the hat"
+}
